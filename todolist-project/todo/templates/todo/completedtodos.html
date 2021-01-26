@@ -1,0 +1,49 @@
+{% extends 'todo/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Todo list</h1>
+
+<h2> There are {{ todolist.count}} item{{ todolist.count|pluralize }} in the list </h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Time Created</th>
+      <th scope="col">Important</th>
+      <th scope="col">Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for todoitem in todolist %}
+
+
+        <tr padding=15px>
+          <td>{{todoitem.id}}</td>
+          <td><a href="{% url 'todoview' todoitem.id %}">
+            {% if todoitem.importantFlag %}
+                <b>{{todoitem.title}}</b>
+            {% else %}
+                {{todoitem.title}}
+            {% endif %}
+          </a></td>
+          <td>{{todoitem.description}}</td>
+          <td>{{todoitem.timeCreated}}</td>
+          <td>{{todoitem.importantFlag}}</td>
+          <td>{{todoitem.completedFlag}}</td>
+        </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+{% endblock %}
